@@ -39,24 +39,27 @@ async def search_web(query: str, max_results: int = 5) -> list:
         logger.error(f"Web search error: {e}")
         return [{"error": f"Error en la búsqueda: {str(e)}"}]
 
+def _escape(s: str) -> str:
+    return s.replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
+
 def format_search_results(results: list) -> str:
     if not results:
-        return "No encontré resultados para esa búsqueda."
+        return "No encontré resultados."
 
     if "error" in results[0]:
         return f"⚠️ {results[0]['error']}"
 
-    lines = ["**Resultados de la búsqueda:**\n"]
+    lines = ["Resultados:\n"]
     for i, r in enumerate(results, 1):
-        title = r.get("title", "Sin título")
-        body = r.get("body", "")
+        title = _escape(r.get("title", "Sin título"))
+        body = _escape(r.get("body", ""))
         href = r.get("href", "")
-        lines.append(f"{i}. **{title}**")
+        lines.append(f"{i}. {title}")
         if body:
-            body_trimmed = body[:300] + "..." if len(body) > 300 else body
-            lines.append(f"   {body_trimmed}")
+            body_t = body[:300] + "..." if len(body) > 300 else body
+            lines.append(f"   {body_t}")
         if href:
-            lines.append(f"   [{href}]({href})")
+            lines.append(f"   {href}")
         lines.append("")
 
     return "\n".join(lines)

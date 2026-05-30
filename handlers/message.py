@@ -96,17 +96,16 @@ async def handle_web_search(update: Update, context: ContextTypes.DEFAULT_TYPE, 
         if text.lower().startswith(prefix):
             query = text[len(prefix):].strip()
             break
-    if not query or query == text:
+    if not query:
         await send_typing(update, context)
         await update.message.reply_text("¿Qué quieres que busque?")
         return
 
-    await context.bot.send_chat_action(chat_id=update.effective_chat.id, action="typing")
     results = await search_web(query)
     formatted = format_search_results(results)
-    await save_message(update.effective_user.id, "assistant", f"Búsqueda: {query[:50]}", "web_search")
+    await save_message(update.effective_user.id, "assistant", f"Búsqueda: {query[:100]}", "web_search")
 
-    msg = f"🔎 {query}\n\n{formatted}" if results and "error" not in results[0] else "No encontré resultados."
+    msg = f"🔎 {query}\n\n{formatted}" if results and not results[0].get("error") else formatted
     await update.message.reply_text(msg, disable_web_page_preview=True)
 
 async def handle_audit_request(update: Update, context: ContextTypes.DEFAULT_TYPE, text: str):

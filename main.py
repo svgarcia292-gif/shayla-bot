@@ -25,8 +25,15 @@ from handlers.message import handle_message
 
 def run_healthcheck():
     import http.server
+    class HC(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(200)
+            self.send_header("Content-Type", "text/plain")
+            self.end_headers()
+            self.wfile.write(b"ok")
+        def log_message(self, *a): pass
     port = int(os.getenv("PORT", "8000"))
-    server = http.server.HTTPServer(("0.0.0.0", port), http.server.SimpleHTTPRequestHandler)
+    server = http.server.HTTPServer(("0.0.0.0", port), HC)
     logger.info(f"Healthcheck on port {port}")
     server.serve_forever()
 

@@ -48,8 +48,10 @@ class ProspectorEngine:
         if any(kw in msg for kw in ["métrica", "kpi", "cómo voy", "progreso", "resultados"]):
             return "metrics"
 
-        if any(kw in msg for kw in ["investigar", "email", "correo"]):
+        if any(kw in msg for kw in ["investigar"]):
             return "deep_research"
+        if any(kw in msg for kw in ["email", "correo"]):
+            return "email_outreach"
 
         if any(kw in msg for kw in ["buscar", "internet", "google", "dime sobre", "qué sabes de"]):
             return "web_search"
