@@ -16,7 +16,7 @@ async def handle_audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Audio muy largo (>2 min). Escríbelo mejor.")
         return
 
-    await context.bot.send_chat_action(chat_id=update.effective_chat.id, action="typing")
+    processing_msg = await update.message.reply_text("🎤 Escuchando...")
 
     try:
         file = await context.bot.get_file(voice.file_id)
@@ -25,9 +25,11 @@ async def handle_audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
         result = await transcribe_file(bytes(file_bytes))
 
         if result.get("error") or not result.get("text"):
-            await update.message.reply_text("No entendí el audio. ¿Puedes escribirlo?")
+            await processing_msg.edit_text("No entendí el audio. ¿Puedes escribirlo?")
             return
+
+        await processing_msg.delete()
 
         await handle_text_message(update, context, result["text"])
     except Exception as e:
-        await update.message.reply_text("Error procesando el audio. Escríbeme directamente.")
+        await processing_msg.edit_text("Error procesando el audio. Escríbeme directamente.")
