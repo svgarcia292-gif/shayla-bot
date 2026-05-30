@@ -1,0 +1,11 @@
+[build]
+  builder = "DOCKERFILE"
+  dockerfile = "Dockerfile"
+
+[deploy]
+  startCommand = "python main.py"
+  healthcheckPath = "/"
+  restatPolicy = "always"
+
+[deploy.volumes]
+  "data" = "/app/data"
