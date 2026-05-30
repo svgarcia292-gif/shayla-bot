@@ -192,16 +192,16 @@ class ProspectorEngine:
 
     def _emotional_block_response(self) -> str:
         return (
-            "Cuéntame qué está pasando. Es normal sentirse así, de verdad.\n\n"
-            "La mayoría de la gente siente algo de esto cuando piensa en 'venderse' o "
-            "en contactar con desconocidos:\n\n"
-            "• **"Me da vergüenza"** → Como si estuvieras mendigando. Pero no es así, "
-            "en realidad solo estás haciendo visible lo que sabes hacer.\n"
-            "• **"No soy suficiente"** → Ese síndrome del impostor. Crees que necesitas "
-            "saber mucho más antes de mostrar algo.\n"
-            "• **"Ya lo intenté y no funcionó"** → Probablemente el sistema, no tú.\n"
-            "• **"Me da cosa escribir a desconocidos"** → Normal, a todos nos da cosa al principio.\n\n"
-            "¿Cuál de estos te resuena más? O si es otra cosa, dímelo con tus palabras."
+            'Cuéntame qué está pasando. Es normal sentirse así, de verdad.\n\n'
+            'La mayoría de la gente siente algo de esto cuando piensa en "venderse" o '
+            'en contactar con desconocidos:\n\n'
+            '• **"Me da vergüenza"** → Como si estuvieras mendigando. Pero no es así, '
+            'en realidad solo estás haciendo visible lo que sabes hacer.\n'
+            '• **"No soy suficiente"** → Ese síndrome del impostor. Crees que necesitas '
+            'saber mucho más antes de mostrar algo.\n'
+            '• **"Ya lo intenté y no funcionó"** → Probablemente el sistema, no tú.\n'
+            '• **"Me da cosa escribir a desconocidos"** → Normal, a todos nos da cosa al principio.\n\n'
+            '¿Cuál de estos te resuena más? O si es otra cosa, dímelo con tus palabras.'
         )
 
     def _message_audit_response(self) -> str:
