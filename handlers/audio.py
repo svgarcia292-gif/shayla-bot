@@ -29,7 +29,9 @@ async def handle_audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
         await processing_msg.delete()
-
         await handle_text_message(update, context, result["text"])
     except Exception as e:
-        await processing_msg.edit_text("Error procesando el audio. Escríbeme directamente.")
+        try:
+            await processing_msg.edit_text("Error procesando el audio. Escríbeme directamente.")
+        except:
+            pass

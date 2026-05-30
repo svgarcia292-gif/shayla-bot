@@ -1,5 +1,5 @@
 python-telegram-bot==20.8
-openai-whisper==20231117
+openai-whisper>=20240930
 duckduckgo-search==6.2.13
 aiosqlite==0.20.0
 python-dotenv==1.0.1
