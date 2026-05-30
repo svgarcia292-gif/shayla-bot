@@ -4,6 +4,7 @@ Integra Hot Outreach, Creator Vision Framework, Método Lanzamiento y Principio 
 """
 import asyncio
 import sys
+import os
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -24,6 +25,15 @@ from telegram.ext import (
 from handlers.commands import start, help_command, reset, search_command, audit_command, error_handler
 from handlers.audio import handle_audio
 from handlers.message import handle_message
+
+async def healthcheck_server():
+    from asyncio import start_server
+    port = int(os.getenv("PORT", "8000"))
+    handler = lambda r, w: (w.write(b"HTTP/1.1 200 OK\r\n\r\nok"), w.close())
+    server = await start_server(handler, "0.0.0.0", port)
+    logger.info(f"Healthcheck server listening on port {port}")
+    async with server:
+        await server.serve_forever()
 
 async def post_init(app: Application):
     logger.info("Shayla bot initialized successfully")
@@ -66,7 +76,11 @@ async def main():
     logger.info("Shayla bot started polling...")
     print("🤖 Shayla bot is running. Press Ctrl+C to stop.")
 
-    await app.run_polling(allowed_updates=Update.ALL_TYPES)
+    async with app:
+        await app.start()
+        asyncio.create_task(healthcheck_server())
+        await app.updater.start_polling(allowed_updates=Update.ALL_TYPES)
+        await asyncio.Event().wait()
 
 if __name__ == "__main__":
     try:
