@@ -14,16 +14,21 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await save_message(user.id, "system", "Usuario inició conversación", "onboarding")
 
     welcome = (
-        f"Hola {user.first_name} 👋 Soy **Shayla**, tu mentora de prospección.\n\n"
-        "Estoy aquí para ayudarte a conseguir lo que quieres:\n"
-        "• 💼 **Buscar trabajo** con un sistema que funciona\n"
-        "• 🎙 **Conseguir oportunidades** (podcasts, charlas, reuniones)\n"
-        "• 📢 **Construir tu marca personal**\n"
-        "• ✉️ **Generar mensajes** que obtienen respuesta\n"
-        "• 🎯 **Preparar entrevistas** con ventaja 1.2x\n"
-        "• 🧠 **Desbloqueos emocionales**\n"
-        "• 🔎 **Buscar en internet** información actualizada\n\n"
-        "¿Qué necesitas hoy? Cuéntame y empezamos."
+        f"Hola {user.first_name} ✨ Soy **Shayla**, encantada.\n\n"
+        "Mira, te explico de qué va todo esto de forma simple:\n\n"
+        "¿Sabes cuando quieres conseguir algo —un trabajo, un cliente, una oportunidad— "
+        "pero no sabes muy bien cómo pedirlo o por dónde empezar? Pues de eso se trata.\n\n"
+        "Yo te enseño paso a paso, sin jerga rara, sin cosas de vendedor. Solo métodos "
+        "que funcionan para gente normal que quiere avanzar en su carrera.\n\n"
+        "**¿Qué necesitas? Dime con tus palabras:**\n"
+        "💼 Buscar trabajo\n"
+        "🎙 Conseguir una oportunidad (podcast, charla, proyecto)\n"
+        "📢 Crear tu marca personal / LinkedIn\n"
+        "✉️ Ayuda para escribir un mensaje a alguien\n"
+        "🎯 Preparar una entrevista\n"
+        "🧠 Hablar de los miedos que te da todo esto\n"
+        "🔎 Buscar información actualizada\n\n"
+        "O simplemente cuéntame tu situación y empezamos desde ahí."
     )
     await update.message.reply_text(welcome, parse_mode="Markdown")
 
