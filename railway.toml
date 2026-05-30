@@ -4,8 +4,7 @@
 
 [deploy]
   startCommand = "python main.py"
-  healthcheckPath = "/"
-  restatPolicy = "always"
+  restartPolicy = "always"
 
 [deploy.volumes]
   "data" = "/app/data"
